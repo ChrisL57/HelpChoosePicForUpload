@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ImageSelectorApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ImageSelectorApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
