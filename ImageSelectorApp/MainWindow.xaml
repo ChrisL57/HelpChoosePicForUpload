@@ -26,6 +26,7 @@
                 <ComboBoxItem Content="Date de modification - Ascendant"/>
                 <ComboBoxItem Content="Date de modification - Descendant"/>
             </ComboBox>
+            <Button Content="Upload terminé" Click="UploadCompleted_Click" Margin="10" HorizontalAlignment="Right"/>
         </StackPanel>
         <GridView x:Name="ImagesGridView" SelectionMode="Multiple" IsItemClickEnabled="True" Grid.Row="1" SelectionChanged="ImagesGridView_SelectionChanged">
             <GridView.ItemsPanel>

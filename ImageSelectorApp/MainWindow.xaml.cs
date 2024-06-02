@@ -20,6 +20,7 @@ namespace ImageSelectorApp
         private string configFilePath;
         private string lastUsedFolder;
         private string destinationFolder;
+        private const string finalUploadFolderPath = @"E:\________IA OUTPUT\_________ok\____TRI\up\ok\Uploads";
 
         public MainWindow()
         {
@@ -139,6 +140,29 @@ namespace ImageSelectorApp
             };
 
             await dialogConfirmation.ShowAsync();
+        }
+
+        private async void UploadCompleted_Click(object sender, RoutedEventArgs e)
+        {
+            var destinationFolder = await StorageFolder.GetFolderFromPathAsync(this.destinationFolder);
+            var files = await destinationFolder.GetFilesAsync();
+
+            foreach (var file in files)
+            {
+                var finalUploadFolder = await StorageFolder.GetFolderFromPathAsync(finalUploadFolderPath);
+                await file.MoveAsync(finalUploadFolder, file.Name, NameCollisionOption.ReplaceExisting);
+            }
+
+            // Optionnel: Afficher un message de confirmation
+            var dialog = new ContentDialog
+            {
+                Title = "Upload terminé",
+                Content = "Les images ont été déplacées vers le répertoire final.",
+                CloseButtonText = "OK",
+                XamlRoot = this.Content.XamlRoot
+            };
+
+            await dialog.ShowAsync();
         }
 
         private async Task SaveConfigAsync()
